@@ -220,3 +220,25 @@ function getTotalReviewCount(book) {
 }
 
 console.log(getTotalReviewCount(book));
+
+// MAP
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+
+const books = getBooks();
+books;
+const x = [1, 2, 3, 4, 5, 5].map((e) => e * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+essentialData;
