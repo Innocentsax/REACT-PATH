@@ -294,6 +294,7 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
 console.log("Jonas");
 
+// ASYNCHRONOUS JAVASCRIPT: ASYNC/AWAIT
 async function getTodos() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
   const data = await res.json();
