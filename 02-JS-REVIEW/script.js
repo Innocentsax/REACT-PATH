@@ -242,3 +242,47 @@ const essentialData = books.map((book) => ({
   reviewsCount: getTotalReviewCount(book),
 }));
 essentialData;
+
+// FILTER METHOD
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooksWithMovie;
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks;
+
+// REDUCE METHOD
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks;
+
+// SORT METHOD
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.slice().sort((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPages;
+
+// WORKING WITH IMMUTABLE ARRAYS
+// 1. Add book object to Array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+const bookAfterAdd = [...books, newBook];
+bookAfterAdd;
+
+// 2. Delete book object from array
+const booksAfterDelete = bookAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+// 3. Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
