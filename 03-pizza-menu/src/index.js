@@ -80,28 +80,50 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}.We're currently Open
+      {isOpen ? (
+        <Order closeHours={closeHours} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHours}:00.
+        </p>
+      )}
     </footer>
   );
 }
 
+function Order(props) {
+  return (
+    <div className="order">
+      <p>
+        We're open until {props.closeHours}:00. Come visit us or order online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
+}
+
 function Menu() {
+  const pizzas = pizzaData;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza
-            pizzaObj={pizza}
-            key={pizza.name}
-            // name={pizza.name}
-            // photoName={pizza.photoName}
-            // ingredients={pizza.ingredients}
-            // price={pizza.price}
-            // soldOut={pizza.soldOut}
-          />
-        ))}
-      </ul>
+
+      {pizzas && (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza
+              pizzaObj={pizza}
+              key={pizza.name}
+              // name={pizza.name}
+              // photoName={pizza.photoName}
+              // ingredients={pizza.ingredients}
+              // price={pizza.price}
+              // soldOut={pizza.soldOut}
+            />
+          ))}
+        </ul>
+      )}
+
       {/* <Pizza
         name="Pizza spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
@@ -121,13 +143,16 @@ function Menu() {
 
 function Pizza(props) {
   console.log(props);
+
+  if (props.pizzaObj.soldOut) return null;
+
   return (
     <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
         <h1>{props.pizzaObj.name}</h1>
         <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price * 3}</span>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </li>
   );
